@@ -14,6 +14,12 @@ export default async function handler(req, res) {
     });
 
     const data = await response.json();
+
+    if (data.error || !data.access_token) {
+      res.status(400).send('Error: ' + (data.error || 'No token') + '. Description: ' + (data.error_description || 'Check keys'));
+      return;
+    }
+
     const content = `
       <!DOCTYPE html>
       <html>
