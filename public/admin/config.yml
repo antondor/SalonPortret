@@ -6,14 +6,6 @@ media_folder: public/images
 public_folder: /images
 
 collections:
-  - name: pages
-    label: Страницы
-    files:
-      - label: Главная
-        name: index
-        file: src/data/index.json
-        fields:
-          - { label: Заголовок, name: title, widget: string }
   - name: data
     label: Дані
     files:
