@@ -14,3 +14,24 @@ collections:
         file: src/data/index.json
         fields:
           - { label: Заголовок, name: title, widget: string }
+  - name: data
+    label: Дані
+    files:
+      - label: Послуги салону
+        name: services
+        file: src/data/services.json
+        fields:
+          - name: services
+            label: Категорії послуг
+            widget: list
+            summary: '{{fields.category}}'
+            fields:
+              - { label: Назва категорії, name: category, widget: string }
+              - { label: Опис категорії, name: description, widget: string }
+              - name: items
+                label: Список послуг
+                widget: list
+                summary: '{{fields.name}} ({{fields.price}})'
+                fields:
+                  - { label: Назва послуги, name: name, widget: string }
+                  - { label: Вартість, name: price, widget: string }
