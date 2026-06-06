@@ -1,0 +1,30 @@
+backend:
+  name: github
+  repo: antondor/SalonPortret
+  branch: main
+  base_url: https://salonportret.vercel.app
+  auth_endpoint: api/auth
+
+media_folder: "public/uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "data"
+    label: "Данные"
+    files:
+      - file: "src/data/services.json"
+        label: "Услуги и Цены"
+        name: "services_file"
+        fields:
+          - label: "Список категорий"
+            name: "services"
+            widget: "list"
+            fields:
+              - { label: "Название категории", name: "category", widget: "string" }
+              - { label: "Описание категории", name: "description", widget: "text" }
+              - label: "Услуги"
+                name: "items"
+                widget: "list"
+                fields:
+                  - { label: "Название услуги", name: "name", widget: "string" }
+                  - { label: "Цена", name: "price", widget: "string" }

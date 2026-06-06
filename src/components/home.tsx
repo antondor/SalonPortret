@@ -27,7 +27,7 @@ export default function Home() {
                 </div>
 
                 <div id="services" className="scroll-mt-32">
-                    <ServicesAccordion services={servicesData} />
+                    <ServicesAccordion services={servicesData.services} />
                 </div>
 
                 <div id="portfolio" className="scroll-mt-32">
