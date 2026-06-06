@@ -32,33 +32,43 @@ export default async function handler(req, res) {
         <title>Authentication Success</title>
         <style>
           body { font-family: sans-serif; text-align: center; padding-top: 50px; color: #333; }
-          button { padding: 12px 24px; font-size: 14px; cursor: pointer; background: #24292e; color: white; border: none; border-radius: 6px; }
+          button { padding: 12px 24px; font-size: 14px; cursor: pointer; background: #24292e; color: white; border: none; border-radius: 6px; margin-top: 20px; }
         </style>
       </head>
       <body>
         <h2>Авторизация успешна!</h2>
-        <p>Перенаправляем в панель управления...</p>
-        <p><button id="closeBtn">Войти вручную</button></p>
+        <p>Передаем данные в админку...</p>
+        <button id="closeBtn">Закрыть окно</button>
         <script>
           const token = "${data.access_token}";
-          const message = 'authorization:github:success:{"token":"' + token + '","provider":"github"}';
-          
-          function sendAndClose() {
-            if (window.opener) {
-              window.opener.postMessage(message, "*");
-              setTimeout(() => {
-                window.close();
-              }, 1000);
-            } else {
-              alert("Главное окно не найдено");
-            }
+          const messageStr = 'authorization:github:success:{"token":"' + token + '","provider":"github"}';
+          const messageObj = { authorization: "github", status: "success", token: token, provider: "github" };
+
+          function sendData(target, origin) {
+            target.postMessage(messageStr, origin);
+            target.postMessage(messageObj, origin);
           }
 
-          sendAndClose();
-          document.getElementById('closeBtn').addEventListener('click', sendAndClose);
+          if (window.opener) {
+            sendData(window.opener, "*");
+            
+            window.addEventListener("message", function(e) {
+              if (e.data === "authorizing:github") {
+                sendData(window.opener, e.origin);
+              }
+            });
+          }
+
+          document.getElementById('closeBtn').addEventListener('click', function() {
+            window.close();
+          });
+
+          setTimeout(function() {
+            window.close();
+          }, 3000);
         </script>
-      </body>
-      </html>
+              </body>
+              </html>
     `;
 
     res.status(200).send(content);
