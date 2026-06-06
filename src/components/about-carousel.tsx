@@ -8,24 +8,24 @@ export default function AboutCarousel() {
 
     return (
         <motion.section
-            className="space-y-6 pt-4"
+            className="space-y-4 sm:space-y-6 pt-2 sm:pt-4"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6, delay: 0.2 }}
         >
-            <div className="w-full">
+            <div className="w-full px-8 sm:px-0 relative">
                 <Carousel
                     opts={{
                         align: "start",
                         loop: true,
                         watchDrag: true,
                     }}
-                    className="w-full relative"
+                    className="w-full"
                 >
-                    <CarouselContent className="-ml-4">
+                    <CarouselContent className="-ml-2 sm:-ml-4">
                         {aboutImages.map((src, index) => (
-                            <CarouselItem key={index} className="pl-4 basis-full sm:basis-1/2 md:basis-1/3">
+                            <CarouselItem key={index} className="pl-2 sm:pl-4 basis-full sm:basis-1/2 md:basis-1/3">
                                 <motion.div
                                     className="w-full shadow-sm"
                                     initial={{ opacity: 0, scale: 0.98 }}
@@ -37,6 +37,7 @@ export default function AboutCarousel() {
                                         <img
                                             src={src}
                                             alt={`Атмосфера салону ${index + 1}`}
+                                            loading="lazy"
                                             className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                                         />
                                     </AspectRatio>
@@ -46,11 +47,11 @@ export default function AboutCarousel() {
                     </CarouselContent>
 
                     <CarouselPrevious
-                        className="absolute left-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-10 w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100"
+                        className="absolute -left-4 sm:left-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-8 w-8 sm:h-10 sm:w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100 flex"
                         style={{ transform: 'translateY(-50%)', marginTop: 0 }}
                     />
                     <CarouselNext
-                        className="absolute right-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-10 w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100"
+                        className="absolute -right-4 sm:right-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-8 w-8 sm:h-10 sm:w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100 flex"
                         style={{ transform: 'translateY(-50%)', marginTop: 0 }}
                     />
                 </Carousel>

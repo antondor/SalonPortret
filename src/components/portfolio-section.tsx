@@ -10,28 +10,28 @@ interface PortfolioSectionProps {
 export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
     return (
         <motion.section
-            className="space-y-8"
+            className="space-y-6 sm:space-y-8"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true, margin: "-100px" }}
             transition={{ duration: 0.6 }}
         >
-            <div className="border-b border-zinc-300 pb-4">
-                <span className="text-xs font-bold tracking-widest uppercase text-zinc-500">Приклади робіт</span>
+            <div className="border-b border-zinc-300 pb-2 sm:pb-4">
+                <span className="text-[10px] sm:text-xs font-bold tracking-widest uppercase text-zinc-500">Наші роботи</span>
             </div>
 
-            <div className="w-full">
+            <div className="w-full px-8 sm:px-12 relative">
                 <Carousel
                     opts={{
                         align: "start",
                         loop: true,
                         watchDrag: true,
                     }}
-                    className="w-full relative px-12"
+                    className="w-full"
                 >
-                    <CarouselContent className="-ml-6">
+                    <CarouselContent className="-ml-2 sm:-ml-6">
                         {portfolio.map((src, index) => (
-                            <CarouselItem key={index} className="pl-6 basis-full md:basis-1/2">
+                            <CarouselItem key={index} className="pl-2 sm:pl-6 basis-full md:basis-1/2">
                                 <motion.div
                                     className="w-full shadow-sm"
                                     initial={{ opacity: 0, scale: 0.95 }}
@@ -43,6 +43,7 @@ export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
                                         <img
                                             src={src}
                                             alt={`Приклад роботи ${index + 1}`}
+                                            loading="lazy"
                                             className="w-full h-full object-cover opacity-95 group-hover:scale-105 transition-transform duration-500 select-none pointer-events-none"
                                         />
                                     </AspectRatio>
@@ -52,11 +53,11 @@ export default function PortfolioSection({ portfolio }: PortfolioSectionProps) {
                     </CarouselContent>
 
                     <CarouselPrevious
-                        className="absolute left-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-10 w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100"
+                        className="absolute -left-6 sm:left-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-8 w-8 sm:h-10 sm:w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100 flex"
                         style={{ transform: 'translateY(-50%)', marginTop: 0 }}
                     />
                     <CarouselNext
-                        className="absolute right-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-10 w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100"
+                        className="absolute -right-6 sm:right-0 top-1/2 rounded-none border-zinc-200 bg-white text-zinc-950 hover:bg-zinc-950 hover:text-zinc-50 active:bg-zinc-900 active:text-zinc-50 h-8 w-8 sm:h-10 sm:w-10 transition-colors !top-1/2 !translate-y-[-50%] active:scale-100 flex"
                         style={{ transform: 'translateY(-50%)', marginTop: 0 }}
                     />
                 </Carousel>

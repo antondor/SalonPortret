@@ -9,17 +9,17 @@ export default function Header() {
     };
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/80 backdrop-blur-md">
-            <div className="max-w-6xl mx-auto h-16 px-6 flex items-center justify-between">
-                <span className="text-sm font-bold tracking-widest text-zinc-950 uppercase cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <header className="sticky top-0 z-50 w-full border-b border-zinc-200 bg-white/90 backdrop-blur-md">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex flex-col md:flex-row items-center justify-between gap-4">
+                <span className="text-sm font-bold tracking-widest text-zinc-950 uppercase cursor-pointer shrink-0" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
                     <img
-                        src="/logo_small.jpg"
-                        alt="Portret Logo Small"
-                        className="object-cover"
+                        src="/logo_header.png"
+                        alt="Portret Logo"
+                        className="object-cover h-8"
                     />
                 </span>
 
-                <nav className="flex items-center gap-6 sm:gap-8 text-xs font-semibold tracking-widest uppercase text-zinc-600">
+                <nav className="flex flex-wrap justify-center items-center gap-x-4 gap-y-2 sm:gap-6 text-[10px] sm:text-xs font-semibold tracking-widest uppercase text-zinc-600">
                     <button
                         onClick={() => scrollToSection('about_us')}
                         className="hover:text-zinc-950 transition-colors uppercase"
