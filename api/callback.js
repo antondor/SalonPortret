@@ -4,7 +4,7 @@ export default async function handler(req, res) {
   const client_secret = process.env.GITHUB_CLIENT_SECRET;
 
   if (!code) {
-    res.status(400).send('Режим ожидания: Скрипт готов. Запускай его через админку сайта.');
+    res.status(400).send('No code provided');
     return;
   }
 
@@ -21,7 +21,7 @@ export default async function handler(req, res) {
     const data = await response.json();
 
     if (data.error || !data.access_token) {
-      res.status(400).send('Error: ' + (data.error || 'No token') + '. Description: ' + (data.error_description || 'Check keys'));
+      res.status(400).send('Error: ' + (data.error || 'No token'));
       return;
     }
 
@@ -29,28 +29,33 @@ export default async function handler(req, res) {
       <!DOCTYPE html>
       <html>
       <head>
-        <title>Авторизация...</title>
+        <title>Authentication Success</title>
         <style>
           body { font-family: sans-serif; text-align: center; padding-top: 50px; color: #333; }
+          button { padding: 12px 24px; font-size: 14px; cursor: pointer; background: #24292e; color: white; border: none; border-radius: 6px; }
         </style>
       </head>
       <body>
-        <p>Авторизация успешна! Перенаправляем в админку...</p>
+        <h2>Авторизация успешна!</h2>
+        <p>Перенаправляем в панель управления...</p>
+        <p><button id="closeBtn">Войти вручную</button></p>
         <script>
           const token = "${data.access_token}";
           const message = 'authorization:github:success:{"token":"' + token + '","provider":"github"}';
           
-          if (window.opener) {
-            // Отправляем токен в основную вкладку
-            window.opener.postMessage(message, "*");
-            
-            // Даем браузеру 500мс, чтобы гарантированно доставить сообщение, и только потом закрываемся
-            setTimeout(() => {
-              window.close();
-            }, 500);
-          } else {
-            document.body.innerHTML = '<h3 style="color:red;">Ошибка: window.opener не найден!</h3><p>Браузер заблокировал связь между окнами. Убедись, что заходишь строго по адресу без дополнительных поддоменов.</p>';
+          function sendAndClose() {
+            if (window.opener) {
+              window.opener.postMessage(message, "*");
+              setTimeout(() => {
+                window.close();
+              }, 1000);
+            } else {
+              alert("Главное окно не найдено");
+            }
           }
+
+          sendAndClose();
+          document.getElementById('closeBtn').addEventListener('click', sendAndClose);
         </script>
       </body>
       </html>
