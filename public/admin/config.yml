@@ -9,7 +9,7 @@ collections:
   - name: pages
     label: Страницы
     files:
-      - title: Главная
+      - label: Главная
         name: index
         file: src/data/index.json
         fields:
